@@ -1,31 +1,48 @@
 class Cliente {
 	nombreCliente;
 	dniCliente;
-	numeroCuenta;
-	saldoCuenta;
 }
 
-const cliente1 = new Cliente();
+class CuentaCorriente {
+	numero;
+	#saldo;
+	agencia;
 
-cliente1.nombreCliente = 'Alejandro Perez Ordoñez';
-cliente1.dniCliente = '07455894';
-cliente1.numeroCuenta = '7458-9541-3524-5687';
-cliente1.saldoCuenta = 2000;
+	constructor() {
+		this.numero = '';
+		this.#saldo = 0;
+		this.agencia = '';
+	}
 
-const cliente2 = new Cliente();
+	depositoEnCuenta(valor) {
+		if (valor > 0) {
+			this.#saldo += valor;
+		}
+		return this.#saldo;
+	}
 
-cliente2.nombreCliente = 'Emilio Pablo Cordoba Sanchez';
-cliente2.dniCliente = '148552679';
-cliente2.numeroCuenta = '4978-5525-9654-4125';
-cliente2.saldoCuenta = 7000;
+	retiroEnCuenta(valor) {
+		if (valor <= this.#saldo) {
+			this.#saldo -= valor;
+		}
+		return this.#saldo;
+	}
 
-const cliente3 = new Cliente();
+	verSaldo() {
+		return this.#saldo;
+	}
+}
 
-cliente3.nombreCliente = 'Jose Condorcanqui Robles';
-cliente3.dniCliente = '74851689';
-cliente3.numeroCuenta = '8784-8755-8459-8465';
-cliente3.saldoCuenta = 10;
+cuentaDeAbel = new CuentaCorriente();
 
-console.log(cliente1);
-console.log(cliente2);
-console.log(cliente3);
+let saldo = cuentaDeAbel.verSaldo();
+console.log(`El saldo actual es ${saldo}`);
+
+saldo = cuentaDeAbel.depositoEnCuenta(110);
+console.log(`El saldo actual es ${saldo}`);
+
+saldo = cuentaDeAbel.retiroEnCuenta(110);
+console.log(`El saldo actual es ${saldo}`);
+
+saldo = cuentaDeAbel.depositoEnCuenta(10);
+console.log(`El saldo actual es ${saldo}`);

@@ -1,11 +1,24 @@
+import {Cliente} from './Cliente.js'
+
 export class CuentaCorriente {
-	cliente;
+	#cliente;
 	numero;
 	#saldo;
 	agencia;
 
+	//SET : ASIGNAR O ATRIBUIR
+	set setCliente(valor) {
+		if (valor instanceof Cliente) {
+			this.#cliente = valor;
+		}
+	}
+	//GET: OBTENER
+	get getCliente() {
+		return this.#cliente;
+	}
+
 	constructor() {
-		this.cliente = null;
+		this.#cliente = null;
 		this.numero = '';
 		this.#saldo = 0;
 		this.agencia = '';
@@ -29,7 +42,7 @@ export class CuentaCorriente {
 		return this.#saldo;
 	}
 
-	transferenciaParaCuenta(valor, cuentaDestino){
+	transferenciaParaCuenta(valor, cuentaDestino) {
 		this.retiroEnCuenta(valor);
 		cuentaDestino.depositoEnCuenta(valor);
 	}
